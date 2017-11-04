@@ -1,5 +1,7 @@
 
-build_vs2017_x64/.*
+build_vs2017_x64/
+bin/
+lib/
 *.opendb
 *.db
 *.ipch
