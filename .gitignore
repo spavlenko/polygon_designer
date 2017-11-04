@@ -1,14 +1,4 @@
-
 build_vs2017_x64/
 bin/
 lib/
-*.opendb
-*.db
-*.ipch
-*.filters
-*.tlog
-*.db-shm
-*.db-wal
-*.vcxproj
-*.cmake
-*.bin
+externals/googletest/googletest_1.8/binaries
