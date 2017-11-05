@@ -13,6 +13,8 @@ set(MAIN_SRC
 	renderer.cpp
 	controller.h
 	controller.cpp
+	polygon.h
+	polygon.cpp
 )
 
 set(ALL_SRC	

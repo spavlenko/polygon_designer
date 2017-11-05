@@ -1,5 +1,7 @@
+
 set(ALL_SRC
 	main.cpp
+	polygon_utils_tests.cpp
 )
 
 source_group("src" FILES ${ALL_SRC})

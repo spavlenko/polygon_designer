@@ -22,6 +22,7 @@ set(GOOGLE_TEST_LIB_PATH "${PROJ_EXTERNALS}/googletest/googletest_1.8")
 
 include_directories (
 	${GOOGLE_TEST_LIB_PATH}/include
+	${PROJ_LIBRARIES_SRC}
 )
 
 link_directories(
