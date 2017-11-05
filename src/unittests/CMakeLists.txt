@@ -12,7 +12,8 @@ target_link_libraries(unittests
 	"gtest"	
 	"gmock_main"	
 	"gmock"
+	polygon_designer_lib
 )
-set_target_properties(unittests PROPERTIES LINKER_LANGUAGE CXX)
+
 set_target_properties(unittests PROPERTIES FOLDER executable)
 
