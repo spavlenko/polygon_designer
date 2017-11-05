@@ -3,20 +3,24 @@
 
 #include <QMainWindow>
 #include <QScopedPointer>
+#include <QMouseEvent> 
 
 namespace Ui
 {
     class MainWindow;
 }
 
-class MainWindow : public QMainWindow {
+class MainWindow : public QMainWindow 
+{
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0);
-    virtual ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr);
+    virtual ~MainWindow() override;
+
 private:
-	void ConnectSignals() const;
+	void connectSignals() const;
+	void setStatusbarText(const QString& text) const;
 
 private:
     QScopedPointer<Ui::MainWindow> m_ui;

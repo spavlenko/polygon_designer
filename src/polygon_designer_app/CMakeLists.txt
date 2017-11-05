@@ -17,6 +17,8 @@ set(MAIN_SRC
 	mainwindow.cpp
 	mainwindow.h	
 	mainwindow.ui
+	drawing_area.h
+	drawing_area.cpp
 )
 
 set(ALL_SRC
