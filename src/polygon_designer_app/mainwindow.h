@@ -15,9 +15,11 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow(QWidget *parent = 0);
     virtual ~MainWindow();
+private:
+	void ConnectSignals() const;
 
 private:
-    QScopedPointer<Ui::MainWindow> ui;
+    QScopedPointer<Ui::MainWindow> m_ui;
 };
 
 #endif

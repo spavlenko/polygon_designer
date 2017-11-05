@@ -6,17 +6,115 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>853</width>
+    <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Main Window</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <property name="statusTip">
+   <string>Ready</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <property name="leftMargin">
+     <number>2</number>
+    </property>
+    <property name="topMargin">
+     <number>2</number>
+    </property>
+    <property name="rightMargin">
+     <number>2</number>
+    </property>
+    <property name="bottomMargin">
+     <number>2</number>
+    </property>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="m_resetBtn">
+          <property name="text">
+           <string>Reset</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_compleateBtn">
+          <property name="text">
+           <string>Compleate</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QGraphicsView" name="m_drawinArea">
+        <property name="cursor" stdset="0">
+         <cursorShape>CrossCursor</cursorShape>
+        </property>
+        <property name="mouseTracking">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="m_statusBar"/>
+  <widget class="QMenuBar" name="m_menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>853</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="m_menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="m_actionExit"/>
+   </widget>
+   <widget class="QMenu" name="m_menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="m_actionAbout"/>
+   </widget>
+   <addaction name="m_menuFile"/>
+   <addaction name="m_menuHelp"/>
+  </widget>
+  <action name="m_actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="m_actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
  </widget>
  <resources>
-  <include location="../example.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
 </ui>
