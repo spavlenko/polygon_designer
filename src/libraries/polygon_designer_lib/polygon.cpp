@@ -1,6 +1,7 @@
 #include "polygon.h"
 #include <cassert>
 
+
 namespace
 {
 	long long crossProduction(const QPoint& lh, const QPoint& rh)
@@ -8,6 +9,8 @@ namespace
 		return static_cast<long long>(lh.x()) * rh.y() - static_cast<long long>(lh.y()) * rh.x();
 	}
 }
+
+
 Polygon::Polygon(const VertexList& vertexes)
 	: m_vertexes(vertexes)
 {
@@ -18,9 +21,29 @@ const VertexList& Polygon::getVertexes() const
 	return m_vertexes;
 }
 
-double calculateArear(const Polygon& polygon)
+double calculateArea(const Polygon& polygon)
 {
-	return .0;
+	if (polygon.getVertexes().size() < 3)
+		return -1;
+
+	double area = .0;
+
+	const auto vertexesCount = polygon.getVertexes().size();
+	
+	size_t i = vertexesCount - 1;
+
+	for(std::size_t j = 0; j < vertexesCount; ++j)
+	{
+		const auto pi = polygon.getVertexes()[i];
+		const auto pj = polygon.getVertexes()[j];
+
+		area += (pi.x() + pj.x()) * (pi.y() - pj.y());
+
+		i = j;
+	}
+
+	return area / 2;
+
 }
 
 bool isConvex(const Polygon& polygon)

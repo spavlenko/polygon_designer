@@ -15,6 +15,8 @@ set(MAIN_SRC
 	controller.cpp
 	polygon.h
 	polygon.cpp
+	utils.h
+	utils.cpp
 )
 
 set(ALL_SRC	

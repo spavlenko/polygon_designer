@@ -1,5 +1,5 @@
 #pragma once
-#include <qpoint.h>
+#include <QPoint>
 #include <vector>
 
 using Vertex = QPoint;
@@ -17,6 +17,6 @@ private:
 };
 
 
-double calculateArear(const Polygon& polygon);
+double calculateArea(const Polygon& polygon);
 bool isConvex(const Polygon& polygon);
 
