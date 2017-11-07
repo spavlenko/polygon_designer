@@ -4,6 +4,17 @@
 #include <limits>
 #include "polygon_designer_lib/utils.h"
 
+
+TEST(PolygonTest, AccessToVertexTest)
+{
+	Vertex v({ 1, 1 });
+	Polygon p( {{0, 0}, v, {2, 2}} );
+
+	EXPECT_THROW(p.getVertex(p.getVertextCount()), Error::InvalidVertexIndex);
+
+	EXPECT_EQ(v, p.getVertex(1));
+}
+
 TEST(PolygonUtils, ConvexityCheckTest)
 {
 	const Polygon p0({ {0, 0}, {0, 1}, {1, 1}, {1, 0} });
@@ -33,7 +44,7 @@ TEST(PolygonUtils, AreaCheckTest)
 	ASSERT_EQ(4.0, val);
 }
 
-TEST(Utils, LineIntersectionCheck)
+TEST(Utils, LineIntersectionCheckTest)
 {	
 	ASSERT_FALSE(Utils::doLinesIntersect({1, 1}, {10, 1}, {1, 2}, {10, 2}));
 	ASSERT_TRUE(Utils::doLinesIntersect({10, 0}, {0, 10}, {0, 0}, {10, 10}));	
