@@ -1,8 +1,8 @@
 #include "polygon_designer_lib/polygon.cpp"
+#include "polygon_designer_lib/utils.h"
 
 #include <gtest/gtest.h>
 #include <limits>
-#include "polygon_designer_lib/utils.h"
 
 
 TEST(PolygonTest, AccessToVertexTest)
@@ -22,9 +22,11 @@ TEST(PolygonUtils, ConvexityCheckTest)
 	ASSERT_TRUE(isConvex(p0));
 
 	const Polygon p1({ {0, 0}, {0, 2}, {3, 7}, {4, 4}, {2, 2}, {2, 4} });
+
 	ASSERT_FALSE(isConvex(p1));
 
 	const Polygon p2({ {0, 0}, {1, 1}, {0, 1}, {1, 0} });
+	
 	ASSERT_FALSE(isConvex(p2));
 
 	const Polygon p3({ {1, 1}

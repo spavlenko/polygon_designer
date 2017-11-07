@@ -24,10 +24,13 @@ void MainWindow::connectSignals() const
 		setStatusbarText(QString(tr("x=%0, y=%1").arg(p.x()).arg(p.y())));
 	});
 
-	QObject::connect(m_ui->m_drawinArea, &DrawingArea::mouseLeft, [this]()
+	QObject::connect(m_ui->m_drawinArea, &DrawingArea::mouseLeftArea, [this]()
 	{
 		setStatusbarText("");
 	});
+	
+	const Polygon p1({ { 0, 0 }, { 0, 50 }, { 90, 150 }, {100, 90 }, { 100, 50 }, { 20, 20 } });
+	m_ui->m_drawinArea->setRenderer(std::make_unique<PolygonRenderer>(p1));
 }
 
 void MainWindow::setStatusbarText(const QString& text) const

@@ -28,10 +28,10 @@ public:
 	explicit Polygon(const VertexList& vertexes);
 	
 	std::size_t getVertextCount() const;
-	const Vertex& getVertex(const std::size_t id) const;
+	const Vertex& getVertex(const std::size_t id) const;	
 
 private:
-	const VertexList m_vertexes;
+	VertexList m_vertexes;
 };
 
 

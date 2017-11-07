@@ -17,6 +17,8 @@ set(MAIN_SRC
 	polygon.cpp
 	utils.h
 	utils.cpp
+	designer.h
+	designer.cpp
 )
 
 set(ALL_SRC	
