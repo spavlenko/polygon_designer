@@ -19,14 +19,16 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJ_LIB_BIN})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJ_BIN})
 
 set(GOOGLE_TEST_LIB_PATH "${PROJ_EXTERNALS}/googletest/googletest_1.8")
+set(OPTIONAL_VALUES_LIB_PATH "${PROJ_EXTERNALS}/optional")
 
 include_directories (
-	${GOOGLE_TEST_LIB_PATH}/include
-	${PROJ_LIBRARIES_SRC}
+    ${GOOGLE_TEST_LIB_PATH}/include
+    ${OPTIONAL_VALUES_LIB_PATH}/include
+    ${PROJ_LIBRARIES_SRC}
 )
 
 link_directories(
-	${GOOGLE_TEST_LIB_PATH}/binaries
+    ${GOOGLE_TEST_LIB_PATH}/binaries
 )
 
 message("Configure libraries")

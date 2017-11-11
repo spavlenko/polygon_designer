@@ -8,21 +8,22 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-set(MAIN_SRC	
-	renderer.h
-	renderer.cpp
-	controller.h
-	controller.cpp
-	polygon.h
-	polygon.cpp
-	utils.h
-	utils.cpp
-	designer.h
-	designer.cpp
+set(MAIN_SRC    
+    renderer.h
+    renderer.cpp
+    validator.h
+    validator.cpp
+	figure.h
+    polygon.h
+    polygon.cpp
+    utils.h
+    utils.cpp
+    designer.h
+    designer.cpp
 )
 
-set(ALL_SRC	
-	${MAIN_SRC}
+set(ALL_SRC    
+    ${MAIN_SRC}
 )
 
 add_library(polygon_designer_lib ${ALL_SRC} )

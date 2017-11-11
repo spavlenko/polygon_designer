@@ -4,55 +4,55 @@
 
 namespace
 {
-	namespace Const
-	{
-		const auto backgroundColor = Qt::white;
-	}
+    namespace Const
+    {
+        const auto backgroundColor = Qt::white;
+    }
 }
 
 DrawingArea::DrawingArea(QWidget* parent)
-	: Parent(parent)
+    : Parent(parent)
 {
-	QPalette pal(palette());
+    QPalette pal(palette());
 
-	pal.setColor(QPalette::Background, Const::backgroundColor);
+    pal.setColor(QPalette::Background, Const::backgroundColor);
 
-	setAutoFillBackground(true);
-	setPalette(pal);
+    setAutoFillBackground(true);
+    setPalette(pal);
 }
 
 void DrawingArea::setRenderer(Renderer::Ptr renderer)
 {
-	m_renderer = std::move(renderer);
+    m_renderer = std::move(renderer);
 }
 
 void DrawingArea::mouseMoveEvent(QMouseEvent* event)
 {
-	emit mouseMoved(event->pos());
+    emit mouseMoved(event->pos());
 
-	Parent::mouseMoveEvent(event);
+    Parent::mouseMoveEvent(event);
 }
 
 void DrawingArea::mousePressEvent(QMouseEvent* event)
 {
-	emit mousePressed(event->pos());
+    emit mousePressed(event->pos());
 
-	Parent::mousePressEvent(event);
-} 
+    Parent::mousePressEvent(event);
+}
 
 void DrawingArea::leaveEvent(QEvent* event)
 {
-	emit mouseLeftArea();
+    emit mouseLeftArea();
 
-	Parent::leaveEvent(event);
+    Parent::leaveEvent(event);
 }
 
 void DrawingArea::paintEvent(QPaintEvent* event)
 {
-	if(!m_renderer)
-		return;
+    if(!m_renderer)
+        return;
 
-	QPainter painter(this);
+    QPainter painter(this);
 
-	m_renderer->draw(painter);
+    m_renderer->draw(painter);
 }

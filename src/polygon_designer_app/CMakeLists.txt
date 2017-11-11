@@ -9,27 +9,27 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(RESOURCES_SRC
-	resources.qrc
+    resources.qrc
 )
 
 set(MAIN_SRC
-	main.cpp
-	mainwindow.cpp
-	mainwindow.h	
-	mainwindow.ui
-	drawing_area.h
-	drawing_area.cpp
+    main.cpp
+    mainwindow.cpp
+    mainwindow.h    
+    mainwindow.ui
+    drawing_area.h
+    drawing_area.cpp
 )
 
 set(ALL_SRC
-	${RESOURCES_SRC}
-	${MAIN_SRC}
+    ${RESOURCES_SRC}
+    ${MAIN_SRC}
 )
 
 add_executable(polygon_designer_app ${ALL_SRC} )
 
 target_link_libraries(polygon_designer_app
-	polygon_designer_lib
+    polygon_designer_lib
 )
 
 qt5_use_modules(polygon_designer_app Core Gui Widgets)

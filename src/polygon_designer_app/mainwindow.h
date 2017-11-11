@@ -2,15 +2,16 @@
 #define mainwindow_h
 
 #include <QMainWindow>
-#include <QScopedPointer>
-#include <QMouseEvent> 
+#include <memory>
+
+class Designer;
 
 namespace Ui
 {
     class MainWindow;
 }
 
-class MainWindow : public QMainWindow 
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
@@ -19,11 +20,14 @@ public:
     virtual ~MainWindow() override;
 
 private:
-	void connectSignals() const;
-	void setStatusbarText(const QString& text) const;
+    void connectSignals() const;
+    void setStatusbarText(const QString& text) const;
+
+    void startDrawing();
 
 private:
-    QScopedPointer<Ui::MainWindow> m_ui;
+    std::unique_ptr<Ui::MainWindow> m_ui;
+    std::unique_ptr<Designer>       m_designer;
 };
 
 #endif
