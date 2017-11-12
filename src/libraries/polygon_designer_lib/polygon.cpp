@@ -29,6 +29,11 @@ Polygon::Polygon(const VertexList& vertexes)
 {
 }
 
+Polygon::Polygon(const Polygon& p)
+    : m_vertexes(p.m_vertexes)
+{
+}
+
 std::size_t Polygon::getVertexCount() const
 {
     return m_vertexes.size();
@@ -45,11 +50,18 @@ const Vertex& Polygon::getVertex(const std::size_t id) const
 EdgesList Polygon::getEdgesList() const
 {
     EdgesList res;
+
     const auto vertexCount = getVertexCount();
 
-    for (size_t i = 0; i < vertexCount; ++i)
+    if (vertexCount < 2)
+        return res;
+
+    res.push_back({0, 1});
+
+    if(vertexCount > 2)
     {
-        res.push_back({ getVertex((i) % vertexCount), getVertex((i + 1) % vertexCount) });
+        for (size_t i = 1; i < vertexCount; ++i)
+            res.push_back({i % vertexCount, (i + 1) % vertexCount });
     }
 
     return res;
@@ -80,6 +92,24 @@ void Polygon::popVertex()
     m_vertexes.erase(std::prev(m_vertexes.end()));
 
     emit changed();
+}
+
+bool Polygon::doEdgesIntersects(const Edge& rhs, const Edge& lhs) const
+{
+    if (rhs == lhs)
+        return true;
+
+
+    if (rhs.first == lhs.first || rhs.first == lhs.second
+        || rhs.second == lhs.first || rhs.second == lhs.second)
+        return false;
+
+    const auto rhsStart = getVertex(rhs.first);
+    const auto rhsEnd = getVertex(rhs.first);
+
+    //todo: optimize
+    return Utils::doLinesIntersect(getVertex(rhs.first), getVertex(rhs.second)
+        , getVertex(lhs.first), getVertex(lhs.second));
 }
 
 double calculateArea(const Polygon& polygon)
@@ -138,17 +168,4 @@ bool isConvex(const Polygon& polygon)
     }
 
     return true;
-}
-
-bool doEdgesIntersects(const Edge& rhs, const Edge& lhs)
-{
-    if(rhs == lhs)
-        return true;
-
-    if(rhs.second == lhs.second || rhs.second == lhs.first
-        || rhs.first == lhs.second || rhs.first == lhs.first)
-        return false;
-
-    //todo: optimize
-    return Utils::doLinesIntersect(rhs.first, rhs.second, lhs.first, lhs.second);
 }

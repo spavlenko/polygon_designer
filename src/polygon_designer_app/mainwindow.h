@@ -1,10 +1,10 @@
-#ifndef mainwindow_h
-#define mainwindow_h
+#pragma once
 
 #include <QMainWindow>
 #include <memory>
 
 class Designer;
+class Polygon;
 
 namespace Ui
 {
@@ -24,10 +24,11 @@ private:
     void setStatusbarText(const QString& text) const;
 
     void startDrawing();
+    void stopDrawing();
 
 private:
     std::unique_ptr<Ui::MainWindow> m_ui;
     std::unique_ptr<Designer>       m_designer;
+    std::unique_ptr<Polygon>       m_polygon;
 };
 
-#endif

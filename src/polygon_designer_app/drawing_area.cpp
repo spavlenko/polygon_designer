@@ -1,6 +1,7 @@
 #include "drawing_area.h"
 
 #include <QMouseEvent>
+#include <QPainter>
 
 namespace
 {
@@ -24,6 +25,7 @@ DrawingArea::DrawingArea(QWidget* parent)
 void DrawingArea::setRenderer(Renderer::Ptr renderer)
 {
     m_renderer = std::move(renderer);
+    update();
 }
 
 void DrawingArea::mouseMoveEvent(QMouseEvent* event)

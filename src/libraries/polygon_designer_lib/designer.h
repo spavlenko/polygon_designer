@@ -25,6 +25,7 @@ public:
 signals:
     void figureAcceptable(const bool isAcceptable) const;
     void pendingPointPositionAcceptable(const bool isAcceptable) const;
+    void pendingPointIndexChanged(const std::experimental::optional<std::size_t>& index) const;
 
 private:
     void validateFigure() const;

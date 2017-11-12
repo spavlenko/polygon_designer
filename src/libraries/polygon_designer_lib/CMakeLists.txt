@@ -11,6 +11,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(MAIN_SRC    
     renderer.h
     renderer.cpp
+	rendering_strategy.h
+	rendering_strategy.cpp
     validator.h
     validator.cpp
 	figure.h

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "polygon.h"
+#include "rendering_strategy.h"
 
 #include <memory>
-
 
 class QPainter;
 
@@ -27,18 +27,14 @@ public:
 
 class PolygonRenderer final: public Renderer
 {
-
 public:
-    explicit PolygonRenderer(const Polygon& polygon);
+    PolygonRenderer(const Polygon& polygon, IPolygonRenderingStrategy::Ptr strategy );
 
     virtual void draw(QPainter& painter) const override;
 
 private:
-    const Polygon& m_polygonToRender;
+    const Polygon&                 m_polygonToRender;
+    IPolygonRenderingStrategy::Ptr m_renderingStrategy;
 };
-
-
-
-
 
 

@@ -5,8 +5,10 @@
 class Figure : public QObject
 {
     Q_OBJECT;
-public:
+protected:
     Figure() = default;
+
+public:
     virtual ~Figure() = default;
 
 signals:

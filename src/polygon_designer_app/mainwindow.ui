@@ -42,9 +42,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="m_compleateBtn">
+         <widget class="QPushButton" name="m_completeBtn">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
-           <string>Compleate</string>
+           <string>Complete</string>
           </property>
          </widget>
         </item>
@@ -84,7 +87,7 @@
      <x>0</x>
      <y>0</y>
      <width>853</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="m_menuFile">

@@ -1,7 +1,9 @@
 #pragma once
-#include <QGraphicsView>
-#include <memory>
+
 #include "polygon_designer_lib/renderer.h"
+
+#include <QWidget>
+#include <memory>
 
 class DrawingArea: public QWidget
 {
