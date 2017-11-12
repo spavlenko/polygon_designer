@@ -49,15 +49,18 @@ void MainWindow::startDrawing()
     QObject::connect(m_ui->m_drawinArea, &DrawingArea::mouseLeftArea, m_designer.get(), &Designer::discardPendingPoint);
     QObject::connect(m_ui->m_drawinArea, &DrawingArea::mousePressed,  m_designer.get(), &Designer::acceptPendingPoint);
 
-    QObject::connect(m_designer.get(), &Designer::figureAcceptable
+    QObject::connect(&m_designer->getDrawingFigure(), &Figure::changed
         , m_ui->m_drawinArea, static_cast<void (QWidget::*)(void)>(&QWidget::update));
 
-    QObject::connect(m_designer.get(), &Designer::figureAcceptable, m_ui->m_completeBtn, &QWidget::setEnabled);
+    QObject::connect(m_designer.get(), &Designer::figureChanged, m_ui->m_completeBtn, &QWidget::setEnabled);
 
     auto strategy = std::make_unique<EditingPolygonRenderingStrategy>();
 
     QObject::connect(m_designer.get(), &Designer::pendingPointIndexChanged
-        , strategy.get(), &EditingPolygonRenderingStrategy::setPendingPoint);
+        , strategy.get(), &EditingPolygonRenderingStrategy::setPendingVertex);
+
+    QObject::connect(m_designer.get(), &Designer::figureChanged
+        , strategy.get(), &EditingPolygonRenderingStrategy::polygonCnahged);
 
     m_ui->m_drawinArea->setRenderer(std::make_unique<PolygonRenderer>(m_designer->getDrawingFigure(), std::move(strategy)));
 

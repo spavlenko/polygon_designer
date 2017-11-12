@@ -5,7 +5,6 @@
 
 #include  <optional/optional.hpp>
 
-#include <QPoint>
 #include <QObject>
 
 
@@ -23,16 +22,17 @@ public:
     const Polygon& getDrawingFigure() const;
 
 signals:
-    void figureAcceptable(const bool isAcceptable) const;
-    void pendingPointPositionAcceptable(const bool isAcceptable) const;
+    void figureChanged(const bool isFigureAcceptable, const bool isPendingPointAcceptable) const;
     void pendingPointIndexChanged(const std::experimental::optional<std::size_t>& index) const;
 
 private:
-    void validateFigure() const;
+    void validateFigure();
 
 private:
     std::experimental::optional<std::size_t> m_pendingVertexIndex;
 
-    Polygon m_polygon;
+    Polygon               m_polygon;
     PolygonValidator::Ptr m_validator;
+
+    bool m_isPendingPointAcceptable = true;
 };

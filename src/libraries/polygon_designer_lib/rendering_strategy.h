@@ -30,9 +30,7 @@ public:
 class PermanentPolygonRenderingStrategy final: public IPolygonRenderingStrategy
 {
 public:
-
     virtual QBrush getFillBrush() const override;;
-
     virtual QPen getEdgePen(const Edge& edge, const Polygon& polygon) const override;
 };
 
@@ -42,8 +40,11 @@ public:
     virtual QBrush getFillBrush() const override;
     virtual QPen   getEdgePen(const Edge& edge, const Polygon& polygon) const override;
 
-    void setPendingPoint(const std::experimental::optional<std::size_t>& pendingVertex);
+    void setPendingVertex(const std::experimental::optional<std::size_t>& pendingVertex);
+    void polygonCnahged(const bool isAcceptable, const bool isPendingEdgeAcceptable);
 
 public:
     std::experimental::optional<std::size_t> m_pendingVertex;
+    bool m_isPolygonAcceptable     = false;
+    bool m_isPendingEdgeAcceptable = false;
 };

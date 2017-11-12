@@ -1,5 +1,13 @@
 #include "rendering_strategy.h"
 
+namespace
+{
+    namespace Const
+    {
+        const auto edgeWidth = 3;
+    }
+}
+
 QBrush PermanentPolygonRenderingStrategy::getFillBrush() const
 {
     QBrush brush;
@@ -12,7 +20,7 @@ QBrush PermanentPolygonRenderingStrategy::getFillBrush() const
 QPen PermanentPolygonRenderingStrategy::getEdgePen(const Edge& edge, const Polygon& polygon) const
 {
     Q_UNUSED(edge);
-    return QPen(Qt::black, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    return QPen(Qt::black, Const::edgeWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 }
 
 QBrush EditingPolygonRenderingStrategy::getFillBrush() const
@@ -22,44 +30,40 @@ QBrush EditingPolygonRenderingStrategy::getFillBrush() const
 
 QPen EditingPolygonRenderingStrategy::getEdgePen(const Edge& edge, const Polygon& polygon) const
 {
-    QPen pattern(Qt::black, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-
-    if (polygon.getVertexCount() < 3)
-    {
-        pattern.setStyle(Qt::DashLine);
-
-        return pattern;
-    }
-
-    if (m_pendingVertex.has_value())
-    {
-        if (edge.first == m_pendingVertex.value())
-        {
-            pattern.setColor(Qt::green);
-        }
-        else if (edge.second == m_pendingVertex.value())
-        {
-            pattern.setStyle(Qt::DashLine);
-            pattern.setColor(Qt::green);
-        }
-
-        return  pattern;
-    }
-
     const bool isLastEdge = edge.second == 0;
+    const auto style = isLastEdge ? Qt::DashLine : Qt::SolidLine;
 
-    if (isLastEdge)
-    {
-        pattern.setStyle(Qt::DashLine);
-        pattern.setColor(Qt::green);
-    }
+    QPen pattern(Qt::black, Const::edgeWidth, style, Qt::RoundCap, Qt::RoundJoin);
+
+    //todo: const
+    if (polygon.getVertexCount() < 3)
+        return pattern;
+
+    const bool isPendingEdge = m_pendingVertex.has_value() &&
+        (edge.first == m_pendingVertex.value() || edge.second == m_pendingVertex.value());
+
+    auto color = isLastEdge || isPendingEdge ? Qt::green : Qt::black;
+
+    if (isPendingEdge && !m_isPendingEdgeAcceptable)
+        color = Qt::red;
+
+    if (isLastEdge && !m_isPolygonAcceptable)
+        color = Qt::red;
+
+    pattern.setColor(color);
 
     return pattern;
 }
 
-void EditingPolygonRenderingStrategy::setPendingPoint(const std::experimental::optional<std::size_t>& pendingVertex)
+void EditingPolygonRenderingStrategy::setPendingVertex(const std::experimental::optional<std::size_t>& pendingVertex)
 {
     m_pendingVertex = pendingVertex;
+}
+
+void EditingPolygonRenderingStrategy::polygonCnahged(const bool isAcceptable, const bool isPendingEdgeAcceptable)
+{
+    m_isPendingEdgeAcceptable = isPendingEdgeAcceptable;
+    m_isPolygonAcceptable     = isAcceptable;
 }
 
 

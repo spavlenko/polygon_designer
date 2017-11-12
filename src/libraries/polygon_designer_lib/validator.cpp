@@ -10,8 +10,23 @@ namespace
 
 bool PolygonValidator::isValid(const Polygon& polygon) const
 {
-    return polygon.getVertexCount() >= Const::minVertexConunt;
+    if(polygon.getVertexCount() < Const::minVertexConunt)
+        return false;
+
+    const auto edges = polygon.getEdgesList();
+
+    for(const auto& edge : edges)
+    {
+        for (const auto edgeToCheck : edges)
+        {
+            if (polygon.doEdgesIntersects(edgeToCheck, edge))
+                return false;
+        }
+    }
+
+    return true;
 }
+
 
 bool PolygonValidator::isAllovedEdgePosition(const Polygon& polygon, const Edge& edge) const
 {
@@ -19,12 +34,9 @@ bool PolygonValidator::isAllovedEdgePosition(const Polygon& polygon, const Edge&
 
     for(const auto edgeToCheck : edges)
     {
-        if (edgeToCheck == edge)
-            continue;
-
         if (polygon.doEdgesIntersects(edgeToCheck, edge))
-            return true;
+            return false;
     }
 
-    return false;
+    return true;
 }

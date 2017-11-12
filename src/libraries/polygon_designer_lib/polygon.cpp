@@ -97,8 +97,7 @@ void Polygon::popVertex()
 bool Polygon::doEdgesIntersects(const Edge& rhs, const Edge& lhs) const
 {
     if (rhs == lhs)
-        return true;
-
+        return false;
 
     if (rhs.first == lhs.first || rhs.first == lhs.second
         || rhs.second == lhs.first || rhs.second == lhs.second)

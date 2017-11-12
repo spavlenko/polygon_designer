@@ -28,21 +28,17 @@ void Designer::discardPendingPoint()
     if (!m_pendingVertexIndex.has_value())
         return;
 
-    try
-    {
-        m_pendingVertexIndex.reset();
-        m_polygon.popVertex();
+    m_pendingVertexIndex.reset();
+    m_polygon.popVertex();
 
-        emit pendingPointIndexChanged(m_pendingVertexIndex);
-    }
-    catch(const Error::Base& )
-    {
-        qDebug() << "Unable to discard pending vertex. Error: polygon is empty." ;
-    }
+    emit pendingPointIndexChanged(m_pendingVertexIndex);
 }
 
 void Designer::acceptPendingPoint()
 {
+    if(!m_isPendingPointAcceptable)
+        return;
+
     assert(m_pendingVertexIndex.has_value());
     m_pendingVertexIndex.reset();
 
@@ -54,20 +50,19 @@ const Polygon& Designer::getDrawingFigure() const
     return m_polygon;
 }
 
-void Designer::validateFigure() const
+void Designer::validateFigure()
 {
-    emit figureAcceptable(m_validator->isValid(m_polygon));
+    const auto figureValidity = m_validator->isValid(m_polygon);
 
     if(!m_pendingVertexIndex.has_value() || *m_pendingVertexIndex < 3)
+    {
+        emit figureChanged(figureValidity, true);
         return;
+    }
 
-    //todo: magic numbers
-    const Edge edge1 = { 0, *m_pendingVertexIndex };
-    const Edge edge2 = { *m_pendingVertexIndex - 1, *m_pendingVertexIndex };
+    const Edge pendignEdge = { *m_pendingVertexIndex - 1, *m_pendingVertexIndex };
+    m_isPendingPointAcceptable = m_validator->isAllovedEdgePosition(m_polygon, pendignEdge);
 
-    const auto isAllowed = m_validator->isAllovedEdgePosition(m_polygon, edge1)
-        && m_validator->isAllovedEdgePosition(m_polygon, edge2);
-
-    emit pendingPointPositionAcceptable(isAllowed);
+    emit figureChanged(figureValidity, m_isPendingPointAcceptable);
 }
 
