@@ -58,7 +58,7 @@ EdgesList Polygon::getEdgesList() const
 
     res.push_back({ Polygon::firstPointIndex, Polygon::firstPointIndex  + 1});
 
-    if(vertexCount > 2)
+    if(vertexCount >= Polygon::minPointsRequired)
     {
         for (size_t i = 1; i < vertexCount; ++i)
             res.push_back({i % vertexCount, (i + 1) % vertexCount });
