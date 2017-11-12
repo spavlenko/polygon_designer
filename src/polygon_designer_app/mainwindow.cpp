@@ -65,6 +65,8 @@ void MainWindow::clearStatusbar() const
 void MainWindow::startDrawing()
 {
     clearStatusbar();
+    m_ui->m_completeBtn->setDisabled(true);
+
     m_designer = std::make_unique<Designer>();
 
     QObject::connect(m_ui->m_drawinArea, &DrawingArea::mouseMoved,    m_designer.get(), &Designer::setPendingPointPosition);
