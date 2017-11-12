@@ -1,9 +1,8 @@
 #pragma once
 
-#include "figure.h"
+#include <QObject>
 
 #include <QPoint>
-#include <QLine>
 
 #include <vector>
 #include <memory>
@@ -26,15 +25,20 @@ namespace Error
     };
 }
 
-
 using Edge       = std::pair<std::size_t, std::size_t>;
 using EdgesList  = std::vector<Edge>;
 
 using Vertex     = QPoint;
 using VertexList = std::vector<Vertex>;
 
-class Polygon final: public Figure
+class Polygon final: public QObject
 {
+    Q_OBJECT;
+
+public:
+    static const std::size_t firstPointIndex   = 0;
+    static const std::size_t minPointsRequired = 3;
+
 public:
     explicit Polygon(const VertexList& vertexes = {});
 
@@ -53,11 +57,10 @@ public:
 
     bool doEdgesIntersects(const Edge& rhs, const Edge& lhs) const;
 
+signals:
+    void changed() const;
+
 private:
     VertexList m_vertexes;
 };
-
-
-double calculateArea(const Polygon& polygon);
-bool   isConvex(const Polygon& polygon);
 

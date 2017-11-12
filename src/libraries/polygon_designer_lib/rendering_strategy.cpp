@@ -30,13 +30,12 @@ QBrush EditingPolygonRenderingStrategy::getFillBrush() const
 
 QPen EditingPolygonRenderingStrategy::getEdgePen(const Edge& edge, const Polygon& polygon) const
 {
-    const bool isLastEdge = edge.second == 0;
+    const bool isLastEdge = edge.second == Polygon::firstPointIndex;
     const auto style = isLastEdge ? Qt::DashLine : Qt::SolidLine;
 
     QPen pattern(Qt::black, Const::edgeWidth, style, Qt::RoundCap, Qt::RoundJoin);
 
-    //todo: const
-    if (polygon.getVertexCount() < 3)
+    if (polygon.getVertexCount() < Polygon::minPointsRequired)
         return pattern;
 
     const bool isPendingEdge = m_pendingVertex.has_value() &&

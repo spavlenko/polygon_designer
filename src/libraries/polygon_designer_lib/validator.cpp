@@ -1,16 +1,8 @@
 #include "validator.h"
 
-namespace
-{
-    namespace Const
-    {
-        const auto minVertexConunt = 3;
-    }
-}
-
 bool PolygonValidator::isValid(const Polygon& polygon) const
 {
-    if(polygon.getVertexCount() < Const::minVertexConunt)
+    if(polygon.getVertexCount() < Polygon::minPointsRequired)
         return false;
 
     const auto edges = polygon.getEdgesList();

@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include "polygon_designer_lib/designer.h"
+#include "polygon_designer_lib/utils.h"
 
 #include <QMouseEvent>
 #include <QMessageBox>
@@ -69,7 +71,7 @@ void MainWindow::startDrawing()
     QObject::connect(m_ui->m_drawinArea, &DrawingArea::mouseLeftArea, m_designer.get(), &Designer::discardPendingPoint);
     QObject::connect(m_ui->m_drawinArea, &DrawingArea::mousePressed,  m_designer.get(), &Designer::acceptPendingPoint);
 
-    QObject::connect(&m_designer->getDrawingFigure(), &Figure::changed
+    QObject::connect(&m_designer->getDrawingFigure(), &Polygon::changed
         , m_ui->m_drawinArea, static_cast<void (QWidget::*)(void)>(&QWidget::update));
 
     QObject::connect(m_designer.get(), &Designer::figureChanged, m_ui->m_completeBtn, &QWidget::setEnabled);
@@ -93,6 +95,7 @@ void MainWindow::stopDrawing()
 
     if(!m_designer)
     {
+        //todo:: replcae with fatal
         qDebug() << "Incorrect call of stop drawing. Error: no active designer.";
 
         return;
@@ -110,10 +113,10 @@ void MainWindow::stopDrawing()
 
     QString statusText(tr("Built a polygon. It %0, it's area = %1"));
 
-    const bool isConvex = ::isConvex(*m_polygon);
+    const bool isConvex = Utils::isConvex(*m_polygon);
     const QString convexity = isConvex ? tr("is convex") : tr("is not convex");
 
-    statusText = statusText.arg(convexity).arg(::calculateArea(*m_polygon));
+    statusText = statusText.arg(convexity).arg(Utils::calculateArea(*m_polygon));
 
     setStatusbarText(statusText);
 }

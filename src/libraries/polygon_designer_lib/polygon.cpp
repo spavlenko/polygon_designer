@@ -56,7 +56,7 @@ EdgesList Polygon::getEdgesList() const
     if (vertexCount < 2)
         return res;
 
-    res.push_back({0, 1});
+    res.push_back({ Polygon::firstPointIndex, Polygon::firstPointIndex  + 1});
 
     if(vertexCount > 2)
     {
@@ -103,69 +103,10 @@ bool Polygon::doEdgesIntersects(const Edge& rhs, const Edge& lhs) const
         || rhs.second == lhs.first || rhs.second == lhs.second)
         return false;
 
-    const auto rhsStart = getVertex(rhs.first);
-    const auto rhsEnd = getVertex(rhs.first);
+    const auto& rhsStart = getVertex(rhs.first);
+    const auto& rhsEnd = getVertex(rhs.first);
 
-    //todo: optimize
+    //todo: check
     return Utils::doLinesIntersect(getVertex(rhs.first), getVertex(rhs.second)
         , getVertex(lhs.first), getVertex(lhs.second));
-}
-
-double calculateArea(const Polygon& polygon)
-{
-    const auto vertexesCount = polygon.getVertexCount();
-
-    if (vertexesCount < 3)
-        return -1;
-
-    double area = .0;
-
-    size_t i = vertexesCount - 1;
-
-    for(std::size_t j = 0; j < vertexesCount; ++j)
-    {
-        const auto pi = polygon.getVertex(i);
-        const auto pj = polygon.getVertex(j);
-
-        area += static_cast<double>((static_cast<long long>(pi.x()) + pj.x())
-                    * (static_cast<long long>(pi.y()) - pj.y()));
-
-        i = j;
-    }
-
-    return std::abs(area / 2);
-}
-
-bool isConvex(const Polygon& polygon)
-{
-    const auto vertexesCount = polygon.getVertexCount();
-
-    assert(vertexesCount > 2);
-
-    if (vertexesCount == 3)
-        return true;
-
-    bool sign = false;
-
-    for(size_t i = 0; i < vertexesCount; ++i)
-    {
-        const auto& v1Start = polygon.getVertex((i + 2) % vertexesCount);
-        const auto& v1End = polygon.getVertex((i + 1) % vertexesCount);
-
-        const QPoint v1 = v1End - v1Start;
-
-        const auto& v2Start = polygon.getVertex((i + 1) % vertexesCount);
-        const auto& v2End = polygon.getVertex((i + 0) % vertexesCount);
-
-        const QPoint v2 = v2End - v2Start;
-
-        const auto product = crossProduction(v1, v2);
-
-        if (0 == i)
-            sign = product > 0;
-        else if( sign != product > 0)
-            return false;
-    }
-
-    return true;
 }

@@ -15,7 +15,6 @@ set(MAIN_SRC
 	rendering_strategy.cpp
     validator.h
     validator.cpp
-	figure.h
     polygon.h
     polygon.cpp
     utils.h
