@@ -114,6 +114,7 @@ bool Polygon::doEdgesIntersects(const Edge& rhs, const Edge& lhs) const
 double calculateArea(const Polygon& polygon)
 {
     const auto vertexesCount = polygon.getVertexCount();
+
     if (vertexesCount < 3)
         return -1;
 
@@ -132,7 +133,7 @@ double calculateArea(const Polygon& polygon)
         i = j;
     }
 
-    return area / 2;
+    return std::abs(area / 2);
 }
 
 bool isConvex(const Polygon& polygon)

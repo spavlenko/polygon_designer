@@ -13,9 +13,6 @@
   <property name="windowTitle">
    <string>Main Window</string>
   </property>
-  <property name="statusTip">
-   <string>Ready</string>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <property name="leftMargin">
@@ -80,7 +77,11 @@
     </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="m_statusBar"/>
+  <widget class="QStatusBar" name="m_statusBar">
+   <property name="sizeGripEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
   <widget class="QMenuBar" name="m_menuBar">
    <property name="geometry">
     <rect>
