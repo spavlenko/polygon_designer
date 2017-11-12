@@ -128,7 +128,7 @@ void MainWindow::about()
     QMessageBox aboutDlg(this);
     aboutDlg.setWindowTitle(QString(tr("About %0")).arg(tr(Const::windowsTitle)));
     aboutDlg.setText(tr("This is a simple application, which was written"
-            "which was written as a task in a scope of a interview."));
+            " as a task in a scope of an interview."));
 
     aboutDlg.exec();
 }
