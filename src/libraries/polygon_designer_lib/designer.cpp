@@ -4,9 +4,11 @@
 #include <QDebug>
 
 
-Designer::Designer()
-    : m_validator( std::make_unique<PolygonValidator>())
+Designer::Designer(IPolygonValidator::Ptr validator)
+    : m_validator(std::move(validator))
 {
+    PD_FATAL(m_validator);
+
     QObject::connect(&m_polygon, &Polygon::changed, this, &Designer::validateFigure);
 }
 

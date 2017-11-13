@@ -13,7 +13,7 @@ class Designer : public QObject
     Q_OBJECT;
 
 public:
-    Designer();
+    explicit Designer(IPolygonValidator::Ptr validator);
 
     void setPendingPointPosition(const QPoint& pos);
     void discardPendingPoint();
@@ -31,8 +31,8 @@ private:
 private:
     std::experimental::optional<std::size_t> m_pendingVertexIndex;
 
-    Polygon               m_polygon;
-    PolygonValidator::Ptr m_validator;
+    Polygon                m_polygon;
+    IPolygonValidator::Ptr m_validator;
 
     bool m_isPendingPointAcceptable = true;
 };

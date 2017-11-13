@@ -1,6 +1,7 @@
 
 set(ALL_SRC
     main.cpp
+	designer_tests.cpp
     utils_tests.cpp
 	polygon_tests.cpp
 	validator_tests.cpp	

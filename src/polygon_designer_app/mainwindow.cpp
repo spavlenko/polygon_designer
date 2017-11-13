@@ -74,7 +74,7 @@ void MainWindow::startDrawing()
     clearStatusbar();
     m_ui->m_completeBtn->setDisabled(true);
 
-    m_designer = std::make_unique<Designer>();
+    m_designer = std::make_unique<Designer>(std::make_unique<PolygonValidator>());
 
     QObject::connect(m_ui->m_drawinArea, &DrawingArea::mouseMoved,    m_designer.get(), &Designer::setPendingPointPosition);
     QObject::connect(m_ui->m_drawinArea, &DrawingArea::mouseLeftArea, m_designer.get(), &Designer::discardPendingPoint);
@@ -108,7 +108,7 @@ void MainWindow::stopDrawing()
     m_designer.reset();
 
     Renderer::Ptr renderer = std::make_unique<PolygonRenderer>(*m_polygon
-        , std::make_unique<PolygonDefaultRenderingStrategy>());
+        , std::make_unique<DefaultPolygonRenderingStrategy>());
 
     m_ui->m_drawinArea->setRenderer(std::move(renderer));
 
