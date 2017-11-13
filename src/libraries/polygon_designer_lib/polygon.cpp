@@ -1,9 +1,6 @@
 #include "polygon.h"
 #include "utils.h"
 
-#include <cassert>
-
-
 namespace
 {
     long long crossProduction(const QPoint& lh, const QPoint& rh)
@@ -106,7 +103,6 @@ bool Polygon::doEdgesIntersects(const Edge& rhs, const Edge& lhs) const
     const auto& rhsStart = getVertex(rhs.first);
     const auto& rhsEnd = getVertex(rhs.first);
 
-    //todo: check
     return Utils::doLinesIntersect(getVertex(rhs.first), getVertex(rhs.second)
         , getVertex(lhs.first), getVertex(lhs.second));
 }

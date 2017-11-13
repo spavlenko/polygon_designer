@@ -9,6 +9,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(MAIN_SRC    
+	defines.h
     renderer.h
     renderer.cpp
 	rendering_strategy.h

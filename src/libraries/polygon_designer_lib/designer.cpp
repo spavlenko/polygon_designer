@@ -1,6 +1,8 @@
-#include  "designer.h"
+#include "designer.h"
+#include "defines.h"
 
 #include <QDebug>
+
 
 Designer::Designer()
     : m_validator( std::make_unique<PolygonValidator>())
@@ -39,7 +41,7 @@ void Designer::acceptPendingPoint()
     if(!m_isPendingPointAcceptable)
         return;
 
-    assert(m_pendingVertexIndex.has_value());
+    PD_ASSERT(m_pendingVertexIndex.has_value());
     m_pendingVertexIndex.reset();
 
     emit pendingPointIndexChanged(m_pendingVertexIndex);

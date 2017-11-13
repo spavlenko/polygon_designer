@@ -3,10 +3,10 @@
 
 #include "polygon_designer_lib/designer.h"
 #include "polygon_designer_lib/utils.h"
+#include "polygon_designer_lib/defines.h"
 
 #include <QMouseEvent>
 #include <QMessageBox>
-#include <QDebug>
 #include <QString>
 
 namespace
@@ -93,15 +93,7 @@ void MainWindow::startDrawing()
 
 void MainWindow::stopDrawing()
 {
-    Q_ASSERT(m_designer);
-
-    if(!m_designer)
-    {
-        //todo:: replcae with fatal
-        qDebug() << "Incorrect call of stop drawing. Error: no active designer.";
-
-        return;
-    }
+    PD_FATAL(m_designer);
 
     m_ui->m_completeBtn->setDisabled(true);
 
