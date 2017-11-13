@@ -27,11 +27,11 @@ public:
     virtual QPen   getEdgePen(const Edge& edge, const Polygon& polygon) const = 0;
 };
 
-class PolygonDefaultRenderingStrategy final: public IPolygonRenderingStrategy
+class DefaultPolygonRenderingStrategy final: public IPolygonRenderingStrategy
 {
 public:
     virtual QBrush getFillBrush() const override;;
-    virtual QPen getEdgePen(const Edge& edge, const Polygon& polygon) const override;
+    virtual QPen   getEdgePen(const Edge& edge, const Polygon& polygon) const override;
 };
 
 class EditingPolygonRenderingStrategy final: public IPolygonRenderingStrategy

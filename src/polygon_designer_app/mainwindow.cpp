@@ -5,7 +5,6 @@
 #include "polygon_designer_lib/utils.h"
 #include "polygon_designer_lib/defines.h"
 
-#include <QMouseEvent>
 #include <QMessageBox>
 #include <QString>
 
@@ -21,13 +20,21 @@ MainWindow::MainWindow(QWidget *parent)
 : QMainWindow(parent), m_ui(new Ui::MainWindow)
 {
     m_ui->setupUi(this);
-    setWindowTitle(tr(Const::windowsTitle));
-    connectSignals();
-    startDrawing();
+    init();
 }
 
 MainWindow::~MainWindow()
 {
+}
+
+void MainWindow::init()
+{
+    setWindowTitle(tr(Const::windowsTitle));
+    connectSignals();
+    startDrawing();
+
+    m_ui->m_actionExit->setStatusTip(tr("Close an application"));    
+    m_ui->m_actionAbout->setStatusTip(tr("About an application"));
 }
 
 void MainWindow::connectSignals() const

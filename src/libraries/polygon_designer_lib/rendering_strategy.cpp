@@ -8,7 +8,7 @@ namespace
     }
 }
 
-QBrush PolygonDefaultRenderingStrategy::getFillBrush() const
+QBrush DefaultPolygonRenderingStrategy::getFillBrush() const
 {
     QBrush brush;
     brush.setColor(Qt::green);
@@ -17,7 +17,7 @@ QBrush PolygonDefaultRenderingStrategy::getFillBrush() const
     return brush;
 }
 
-QPen PolygonDefaultRenderingStrategy::getEdgePen(const Edge& edge, const Polygon& polygon) const
+QPen DefaultPolygonRenderingStrategy::getEdgePen(const Edge& edge, const Polygon& polygon) const
 {
     Q_UNUSED(edge);
     return QPen(Qt::black, Const::edgeWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);

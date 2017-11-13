@@ -3,7 +3,7 @@
 #include "polygon.h"
 #include "validator.h"
 
-#include  <optional/optional.hpp>
+#include <optional/optional.hpp>
 
 #include <QObject>
 

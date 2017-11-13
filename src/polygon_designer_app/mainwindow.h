@@ -20,6 +20,7 @@ public:
     virtual ~MainWindow() override;
 
 private:
+    void init();
     void connectSignals() const;
     void setStatusbarText(const QString& text) const;
     void clearStatusbar() const;
