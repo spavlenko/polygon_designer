@@ -42,4 +42,7 @@ TEST(Designer, HappyFlowTest)
     
     d.discardPendingPoint();
     EXPECT_EQ(3, d.getDrawingFigure().getVertexCount());
+
+    d.discardPendingPoint();
+    EXPECT_EQ(3, d.getDrawingFigure().getVertexCount());
 }
